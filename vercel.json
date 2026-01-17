@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "name": "zim-x-engine-global",
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSi ze": "15mb",
+        "runtime": "python3.9"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.py",
+      "headers": {
+        "Cache-Control": "public, max-age=0, must-revalidate",
+        "X-Frame-Options": "DENY",
+        "X-Content-Type-Options": "nosniff"
+      }
+    }
+  ],
+  "functions": {
+    "app.py": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "env": {
+    "PYTHON_VERSION": "3.9",
+    "ENGINE_MODE": "PRODUCTION"
+  }
+}
